@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f3ec">
+  <title>Forca em Rede</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">F</span> Forca em Rede</div>
+      <div class="topbar-actions">
+        <span class="connection"><span class="connection-dot" id="connection-dot"></span><span id="connection-label">Rede local</span></span>
+        <button type="button" class="quiet" id="leave" hidden>Sair da sala</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell layout">
+    <section class="panel entry-panel" id="entry" aria-labelledby="entry-title">
+      <p class="eyebrow"><span class="rule"></span> Multijogador local</p>
+      <h1 id="entry-title">Jogo da <em>forca</em></h1>
+      <p class="intro">Uma pessoa escolhe a palavra. Todo mundo joga uma letra por vez.</p>
+      <form id="join-form" class="form">
+        <label for="name">Seu nome</label>
+        <input id="name" name="name" placeholder="Como podemos chamar você?" maxlength="24" required autocomplete="nickname">
+        <button class="primary" type="submit">Entrar na sala <span aria-hidden="true">→</span></button>
+      </form>
+      <p id="entry-error" class="error" role="alert" hidden></p>
+      <p class="entry-note"><span aria-hidden="true">●</span> De 2 a 16 jogadores na mesma rede</p>
+    </section>
+
+    <section class="panel board" aria-labelledby="board-title" hidden>
+      <div class="board-head">
+        <p class="eyebrow"><span class="rule"></span> <span id="phase-label">Sala de espera</span></p>
+        <span id="round-number" class="round-number" hidden></span>
+      </div>
+      <h1 id="board-title">Sala de espera</h1>
+      <p id="board-description" class="intro" aria-live="polite"></p>
+      <p id="board-error" class="error" role="alert" hidden></p>
+      <button class="primary start" id="start" type="button" hidden>Iniciar rodada <span aria-hidden="true">→</span></button>
+
+      <form id="word-form" class="form word-form" hidden>
+        <label for="word">Palavra ou expressão</label>
+        <input id="word" name="word" type="password" minlength="2" maxlength="24" required autocomplete="off" spellcheck="false" autocapitalize="off" aria-describedby="word-note">
+        <small id="word-note">Use letras com ou sem acento, espaços e hífens.</small>
+        <label for="hint">Dica <span class="optional">opcional</span></label>
+        <input id="hint" name="hint" maxlength="80" placeholder="Ex.: algo que cresce no jardim" autocomplete="off">
+        <button class="primary" type="submit">Confirmar palavra <span aria-hidden="true">→</span></button>
+      </form>
+
+      <div id="word-display" hidden>
+        <p class="hint" id="hint-display" hidden></p>
+        <div class="letter-board" id="letters" aria-live="polite"></div>
+      </div>
+      <div id="key-area" hidden>
+        <div id="keyboard" class="keyboard" role="group" aria-label="Escolha uma letra"></div>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="illustration" aria-labelledby="illustration-title">
+        <div class="illustration-head">
+          <h2 id="illustration-title">A forca</h2>
+          <span class="error-counter" id="error-counter" aria-live="polite">0 / 6 erros</span>
+        </div>
+        <canvas id="gallows" width="520" height="340" aria-hidden="true"></canvas>
+        <div class="strikes" id="strikes" aria-hidden="true"></div>
+      </section>
+
+      <section class="panel players-panel" id="room" aria-labelledby="players-title" hidden>
+        <div class="players-head">
+          <h2 id="players-title">Jogadores</h2>
+          <span id="player-count" class="player-count"></span>
+        </div>
+        <ul id="players" class="players"></ul>
+        <div class="share" id="share" hidden>
+          <label for="share-url">Convide pela rede local</label>
+          <div class="share-row">
+            <input id="share-url" aria-label="Endereço da sala" readonly>
+            <button type="button" class="quiet" id="copy">Copiar</button>
+          </div>
+          <span id="copy-status" class="copy-status" role="status"></span>
+        </div>
+      </section>
+    </aside>
+  </main>
+</body>
+</html>

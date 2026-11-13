@@ -1,0 +1,12 @@
+{
+  "name": "forca-em-rede",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jogo de forca multijogador para a rede local",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

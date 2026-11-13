@@ -1,0 +1,10 @@
+name: forca-em-rede
+
+services:
+  forca:
+    build: .
+    image: forca-em-rede:local
+    init: true
+    restart: unless-stopped
+    ports:
+      - "192.168.15.9:9079:3000"
